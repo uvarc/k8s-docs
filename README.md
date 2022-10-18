@@ -22,14 +22,14 @@ The Service spec files explain the most about other available options for your p
 If you would like to manage your own deployment(s), do the following:
 
 1. Contact the RC DevOps team <uvarc-devops@virignia.edu> to create a NAMESPACE and `kube/config` file for you. This file will contain read-only credentials you will use below. The `.kube/config` file generated for you should be incorporated into any local `.kube/config` file you have for other environments (if any).
-2. Create a clean, empty Git repository and copy these files into it.
+2. Create a clean, empty Git repository and [copy these files](https://s3.amazonaws.com/uvarc-k8s/stubs/deployment-bundle.tar.gz) into it.
 3. Within the `templates/` directory, create a new folder for each deployment. Populate that folder with the necessary files (with updated values for your deployment, service, namespace, etc.) from this documentation.
 4. Work with the DevOps team to connect your Git repo with ArgoCD, our deployment management tool.
 
 ## Observing Your Deployments
 
-Download Lens, a Kubernetes GUI, and connect to our cluster (over UVA Anywhere or from Grounds). Using the Namespace selector in the upper-right, choose
-your namespace and you will have observatility to any of your pods. From there you can view logs, shell into pods, and other functions.
+Download [**Lens**](https://k8slens.dev/), a Kubernetes GUI, and connect to our cluster (over UVA Anywhere or from Grounds). Using the Namespace selector 
+in the upper-right, choose your namespace and you will have observatility to any of your pods. From there you can view logs, shell into pods, and other 
+functions.
 
-NOTE: Lens is a read-only tool. If you want to start, stop, or change a deployment, that must be done through your deployment code, where ArgoCD will
-ensure the state of your application conforms to its defined state in code.
+NOTE: Lens serves as a read-only tool. If you want to start, stop, or change a deployment, that must be done through your deployment code, where ArgoCD will ensure the state of your application conforms to its defined state in code.
