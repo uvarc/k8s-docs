@@ -1,6 +1,6 @@
 # k8s-docs
 
-<img src="https://kubernetes.io/images/kubernetes-horizontal-color.png" style="align:right;width:400px;" alt="Kubernetes" />
+<img src="https://kubernetes.io/images/kubernetes-horizontal-color.png" style="float:right;width:400px;" alt="Kubernetes" />
 
 UVARC Internal documentation and templates for K8S deployments.
 
