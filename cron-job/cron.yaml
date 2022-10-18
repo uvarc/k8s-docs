@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-cron
+  namespace: uvarc-services                # Must conform to namespace
+spec:
+  schedule: "0 16 * * *"      # Follows normal CRON syntax. Cluster is UTC time.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello-cron
+            image: IMAGE-NAME:TAG
+            imagePullPolicy: Always        # Pull for freshness? y/n
+            envFrom:
+            - secretRef:
+                name: SOME-SECRET-AS-ENV-VARS
+            resources:  
+              limits:   
+                cpu: "0.5"
+                memory: 512Mi
+              requests: 
+                cpu: "0.5"
+                memory: 512Mi
+          restartPolicy: OnFailure         # Restarting
+      ttlSecondsAfterFinished: 1800        # Logs available for this length

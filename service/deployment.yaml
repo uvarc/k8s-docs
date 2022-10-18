@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: MYSERVICE-deployment
+  namespace: MYNAMESPACE
+  labels:
+    app: MYSERVICE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: MYSERVICE
+  template:
+    metadata:
+      labels:
+        app: MYSERVICE
+    spec:
+      # Storage volumes in K8S depend upon two elements: 
+      #    1. A PV (persistent volume) defined before consumption, which is defined for you by the DevOps team.
+      #    2. A PVC (persistent volume claim) that consumes the PV, and which maps it to a path within your container.
+      volumes:
+      - name: SOME-nfs-volume
+        persistentVolumeClaim:
+          claimName: SOME-nfs-pvc
+      containers:
+      - name: SOME-container
+        image: ghcr.io/org/container:tag
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: SOME-nfs-volume
+          mountPath: /path/inside/container
+        env:
+        # Map a config map matrix of KV pairs. Config map file defines a name that should match below ("SOME-config-map")
+        # The KEY specified from the config map will be applied to the ENV var name you define here, with the value from the map.
+        - name: HELLO
+          valueFrom:
+            configMapKeyRef:
+              name: SOME-config-map
+              key: HELLO
+        # A "normal" ENV var definition, a static KV pair.
+        - name: R_HOME_DIR
+          value: "/usr/lib/R"
+        # Here we inject secrets as ENV variables, from the secrets.yaml file.
+        envFrom:
+        - secretRef: 
+            name: MYSECRETS
+        resources:
+            memory: "524Mi"
+            cpu: "50m"               # Fractional CPUs - this represents 50/1000 of a CPU
+          limits:
+            memory: "1024Mi"
+            cpu: "100m"
+
+#
+# Deployment file is the basic definition of the pod. It defines the container to run,
+# the number of replicas, any ENV variables, VOLS to be mounted, SECRETS, etc.
+#

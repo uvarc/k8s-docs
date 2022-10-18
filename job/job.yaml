@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: bash-test                               # Must define with unique name
+  namespace: uvarc-services                     # Must declare namespace you have access to
+spec:
+  backoffLimit: 5
+  ttlSecondsAfterFinished: 1800                 # Logs available until (in secs)
+  template:
+    spec:
+      containers:
+      - name: bash-test-container
+        image: "ghcr.io/uvarc/amazonlinux:awscli"
+        # Command must be quote-comma separated
+        command: ["aws","sns","publish","--topic-arn","arn:aws:sns:us-east-1:123456789012:queue1","--message","test"]
+        envFrom:
+        - secretRef: 
+            name: SECRET-AS-ENV-VARS
+        resources:                              # Jobs must conform to namespace resource definitions
+          requests:
+            memory: "1024Mi"
+            cpu: "1"
+          limits:
+            memory: "2048Mi"
+            cpu: "1"
+      restartPolicy: Never

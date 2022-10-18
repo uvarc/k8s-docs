@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: MYAPP-nginx-ingress
+  namespace: MYNAMESPACE
+spec:
+  rules:
+    - host: MYAPP.pods.uvarc.io               # The *.pods.uvarc.io DNS entry is ready for any entry. Other values will require DNS updates.
+      http:
+        paths:
+          - backend:
+              serviceName: SOME-service       # This must match the defined name in your service.yaml
+              servicePort: 8080
+            path: /
+                                              # If SSL/HTTPS are reqired for your site, consult the DevOps team.
+
+
+#
+# Ingress is used if this is a web endpoint to be mapped through the ingress controller. Maps natively to ports 80/443.
+#

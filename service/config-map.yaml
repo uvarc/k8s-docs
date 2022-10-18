@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: SOME-config-map
+data:
+  HELLO: "world"
+
+# A config map is a mapping of KV pairs useful for deployment within this particular environment.
+# In containerized workloads, developers may launch their stack in different environments using
+# different config maps - for endpoint addresses, ENV vars, tokens, etc. that vary from DEV to PROD.
