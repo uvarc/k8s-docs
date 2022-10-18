@@ -8,7 +8,7 @@ could also be concatenated into a single file.
 Required:
 
 - The "deployment" spec is required as it defines the container pod and its basic parameters.
-- The "service" spec is required. It serves as an abstract way to expose an application running on a set of Pods as a network service.
+- The "service" spec is required if the pod functions as a network service. It serves as an abstract way to expose an application running on a set of Pods as a network service.
 - The "ingress" spec is required if you want to map external traffic into your pod via the ingress controller. This can also handle SSL for your site.
 
 Optional:
