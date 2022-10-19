@@ -9,6 +9,7 @@ UVARC Internal documentation and templates for K8S deployments.
 The attached documentation covers the syntax and formatting for these typical deployments:
 
 - **Services** - long-running, network-exposed pods such as web servers and APIs.
+- **Secrets** - A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key.
 - **Jobs** - short-lived, single-run pods such as a task or execution.
 - **Cron Jobs** - recurring jobs set on a schedule.
 
