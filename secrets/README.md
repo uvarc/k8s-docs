@@ -53,4 +53,23 @@ cat secret.yaml | kubeseal \
     --controller-namespace=kube-system \
     --format yaml --cert ssz-k8-sealed-secret-cert.pem > sealedsecret.yaml
 ```
+After being sealed, the above "raw" secret would become:
+```
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: MYSECRET
+  namespace: MYNAMESPACE
+spec:
+  encryptedData:
+    AWS_DEFAULT_REGION: AgC8wn1FHpZ3yhvtshzfBmdi3CDVeron33r3fdMpsibTKCQVPJb8QGF5dpaRdmP4711MDW56aKIxT2axILg/y1+7+UHFTaqb2PQYke66xd4EI+XXy8c0tFYmBA7V6H5G6rSJ3Sx7Q9vZxQf1TKVrBd4/yQTr+Im/OoXnPe22kfLF80G13eO7Ws4JyXmJmnvzoKgUw0p44CP3RccoQ3gP8FOUHmshPo8hgtAfSXsCddKG2bCdSZ5xM0M7NbceN88AfPDElUEfVMWcngMicphjSB4ifHx8d5md8HFxIw/ZT6xWQD1M46eDntvmNVurTD5IZlWRM/Mm1luJe2fi8P7K43xWyNaKN7kPEXvoSuePRTEIWeoRQlDd/Nclce/k9dqCHcSQDgCijZQQc31xKBvzljTmP0mMjQok7J98+NQW6kfV5AeXZAPWTJeU9tEuswXUvfHOmMUEMrfwDzhKS+XG75NpcwSrUDVfd7URP8dl+CybOfoMFYL2vtAOhmMP5WzON1J+CFXg9B88NKoNweuT6AYgRjdcfybNXS9Q7SRQQ9q41gGXIPsMdvIlRWu3tq4TcHdKRuWHzrwDrUYwZkM+pirrwiPVSWQ5USSLtSb4i5XFAP4yC2+caMwE9/1rD4NQT6ZyzybzmWWP0Hxrn/WZ5xPagNnVwdU9esLyQnYbcrpUkqTuM+6vuzcV4lY/FSZHz6WVW6RcNN4J2Z4q
+  template:
+    metadata:
+      creationTimestamp: null
+      name: MYSECRET
+      namespace: MYNAMESPACE
+
+```
+
 * The sealed secret can then be added, committed, and pushed to GitHub, where ArgoCD will create and store the secret. 
