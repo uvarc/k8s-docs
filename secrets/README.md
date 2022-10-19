@@ -32,7 +32,8 @@ Some common use cases for secrets in UVARC deployments:
 * Use the public cert in this directory `ssz-k8-sealed-secret-cert.pem`
 * Create a secret with `data` elements (keys-values). Values should be a base64 version of the actual secret data. See `secret.yaml` for an example, which should look like this:
 
-```apiVersion: v1
+```
+apiVersion: v1
 kind: Secret
 metadata:
   creationTimestamp: null
