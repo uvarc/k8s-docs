@@ -2,7 +2,7 @@
 
 <img src="https://kubernetes.io/images/kubernetes-horizontal-color.png" style="float:right;width:400px;" alt="Kubernetes" />
 
-UVARC Internal documentation and templates for K8S deployments.
+UVARC documentation and sample templates for K8S deployments.
 
 ## Deployment/Config Spec Files
 
