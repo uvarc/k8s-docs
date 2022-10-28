@@ -13,9 +13,11 @@ spec:
 
 
 # 
-# PVCS can map to remote NFS shares, to local cluster storage, to Longhorn volumes, and other
+# PVCs can map to remote NFS shares, to local cluster storage, to Longhorn volumes, and other
 # persistent storage. The capacity as defined (10G in this example) can be enlarged but never
 # shrunken. See https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+#
+# Note that a PVC can only map to a pre-defined Persistent Volume definition.
 #
 # Possible values for accessModes are: 
 # 
