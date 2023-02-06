@@ -12,8 +12,12 @@ spec:
       app: MYSERVICE
   template:
     metadata:
+      # Labels are used for service identification and billing.
       labels:
         app: MYSERVICE
+        contact: mst3k@virginia.edu
+        owner: MST3K
+        department: MYDEPARTMENT
     spec:
       # Storage volumes in K8S depend upon two elements: 
       #    1. A PV (persistent volume) defined before consumption, which is defined for you by the DevOps team.
