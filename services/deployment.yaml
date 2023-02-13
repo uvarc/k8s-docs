@@ -29,6 +29,7 @@ spec:
       containers:
       - name: SOME-container
         image: ghcr.io/org/container:tag
+        imagePullPolicy: [IfNotPresent | Always ]
         ports:
         - containerPort: 80
         volumeMounts:
