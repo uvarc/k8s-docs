@@ -15,7 +15,6 @@ spec:
       # Labels are used for service identification and billing.
       labels:
         app: MYSERVICE
-        contact: mst3k@virginia.edu
         owner: MST3K
         department: MYDEPARTMENT
     spec:
@@ -36,23 +35,26 @@ spec:
         - name: SOME-nfs-volume
           mountPath: /path/inside/container
         env:
-        # Map a config map matrix of KV pairs. Config map file defines a name that should match below ("SOME-config-map")
+        # There are THREE options for injecting env vars:
+        # 1. A "normal" ENV var definition, a static KV pair.
+        - name: R_HOME_DIR
+          value: "/usr/lib/R"
+        # 2. Use a config map matrix of KV pairs. Config map file defines a name that should match below ("SOME-config-map")
         # The KEY specified from the config map will be applied to the ENV var name you define here, with the value from the map.
         - name: HELLO
           valueFrom:
             configMapKeyRef:
               name: SOME-config-map
               key: HELLO
-        # A "normal" ENV var definition, a static KV pair.
-        - name: R_HOME_DIR
-          value: "/usr/lib/R"
-        # Here we inject secrets as ENV variables, from the secrets.yaml file.
+        # 3. Inject secrets as ENV variables, from the secrets.yaml spec. (Secrets can also be injected as files in the tree)
         envFrom:
         - secretRef: 
             name: MYSECRETS
+        # All UVARC deployments require a resource spec:
         resources:
+          requests:
             memory: "524Mi"
-            cpu: "50m"               # Fractional CPUs - this represents 50/1000 of a CPU
+            cpu: "50m"           # Fractional CPUs - this represents 50/1000 of a CPU
           limits:
             memory: "1024Mi"
             cpu: "100m"
